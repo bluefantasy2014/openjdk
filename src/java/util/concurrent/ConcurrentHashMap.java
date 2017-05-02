@@ -215,7 +215,7 @@ public class ConcurrentHashMap<K, V> extends AbstractMap<K, V>
      * backup in case a null (pre-initialized) value is ever seen in
      * an unsynchronized access method.
      */
-    static final class HashEntry<K,V> {
+    static final class HashEntry<K,V> {//JERRY: 表示HashTable中的Entry项目，其中包括Key，Value，以及next指针，因为默认情况下每个Hash bucket是用链表实现的。 
         final K key;
         final int hash;
         volatile V value;
@@ -239,6 +239,7 @@ public class ConcurrentHashMap<K, V> extends AbstractMap<K, V>
      * subclasses from ReentrantLock opportunistically, just to
      * simplify some locking and avoid separate construction.
      */
+    //JERRY: 此类代表ConcurrentHashMap中的内部的每个partition。 
     static final class Segment<K,V> extends ReentrantLock implements Serializable {
         /*
          * Segments maintain a table of entry lists that are ALWAYS
@@ -282,7 +283,7 @@ public class ConcurrentHashMap<K, V> extends AbstractMap<K, V>
         /**
          * The number of elements in this segment's region.
          */
-        transient volatile int count;
+        transient volatile int count;//JERRY: count 是volatile类型的变量。 
 
         /**
          * Number of updates that alter the size of the table. This is
